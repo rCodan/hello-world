@@ -11,7 +11,7 @@ PROG=main
 MODULE=$(PROG).o
 
 
-.PHONY: clean
+.PHONY: clean_all clean clean_tempfiles
 
 all: $(PROG)
 
@@ -21,6 +21,12 @@ $(PROG): $(MODULE)
 %.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c -o $(OBJDIR)/$@ $<
 
+clean_all: clean clean_tempfiles
+
 clean:
 	rm -f $(BINDIR)/$(PROG)
 	rm -f $(OBJDIR)/$(MODULE)
+
+clean_tempfiles:
+	rm -f $(SRCDIR)/*~
+	rm -f $(INCDIR)/*~
